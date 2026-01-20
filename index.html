@@ -1,210 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>3D Portfolio – Vatsal</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<title>V-Store | E-Commerce</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
 :root {
-  --bg:#05070c;
-  --card:rgba(255,255,255,.06);
-  --border:rgba(255,255,255,.15);
-  --glow:#00f6ff;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{
-  background:var(--bg);
-  color:#fff;
-  font-family:Inter,system-ui,sans-serif;
-  overflow-x:hidden;
-}
-nav{
-  position:fixed;top:0;width:100%;padding:15px 40px;
-  display:flex;justify-content:space-between;
-  backdrop-filter:blur(12px);z-index:5;
-}
-nav a{
-  color:white;text-decoration:none;margin-left:20px;opacity:.85;
-}
-nav a:hover{opacity:1;}
-
-section{
-  min-height:100vh;
-  padding:120px 8%;
-  display:flex;align-items:center;
-  justify-content:center;text-align:center;
-  position:relative;z-index:2;
-}
-h1{font-size:clamp(2.8rem,6vw,5rem);}
-h2{font-size:2.3rem;margin-bottom:20px;}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:25px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 0 30px rgba(0,246,255,.08);
+  --bg: #0b0f1a;
+  --card: #111827;
+  --accent: #2563eb;
+  --accent2: #22c55e;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
 }
 
-canvas{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
 }
 
-.contact p{opacity:.85;line-height:1.8;}
+body {
+  background: linear-gradient(180deg, #020617, #0b0f1a);
+  color: var(--text);
+}
+
+/* ===== HEADER ===== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(2,6,23,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #1f2937;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: var(--text);
+  margin-left: 16px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+nav button::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: 0.3s;
+}
+
+nav button:hover::after {
+  width: 100%;
+}
+
+/* ===== MAIN ===== */
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 24px;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: linear-gradient(180deg, #020617, var(--card));
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.card h3 {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+.price {
+  margin-top: 6px;
+  color: var(--accent2);
+  font-weight: bold;
+}
+
+.card button {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), #1e40af);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ===== CART ===== */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #1f2937;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  margin-top: 80px;
+  border-top: 1px solid #1f2937;
+  background: #020617;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
 </style>
 </head>
 
 <body>
 
-<nav>
-  <strong>🚀 Vatsal</strong>
-  <div>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+<header>
+  <div class="header-inner">
+    <h1>🛒 V-Store</h1>
+    <nav>
+      <button onclick="loadHome()">Home</button>
+      <button onclick="loadCategories()">Categories</button>
+      <button onclick="loadCart()">Cart (<span id="cartCount">0</span>)</button>
+    </nav>
   </div>
-</nav>
+</header>
 
-<section id="home">
-  <div>
-    <h1>Building the Future<br>in 3D</h1>
-    <p>Scroll to travel through my universe</p>
-  </div>
-</section>
+<main id="content"></main>
 
-<section id="about">
-  <div>
-    <h2>About Me</h2>
-    <div class="grid">
-      <div class="card">Java & Spring Boot Developer</div>
-      <div class="card">3D Web Enthusiast</div>
-      <div class="card">Scalable System Thinker</div>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h3>V-Store</h3>
+      <p class="muted">Modern E-Commerce Demo</p>
+    </div>
+    <div>
+      <p>👤 Vatsal Varma</p>
+      <p>
+        🔗 <a href="https://github.com/vatsalvarma" target="_blank">GitHub</a><br/>
+        💼 <a href="https://www.linkedin.com/in/vatsal-varma-2bb681294/" target="_blank">LinkedIn</a>
+      </p>
     </div>
   </div>
-</section>
-
-<section id="skills">
-  <div>
-    <h2>Skills</h2>
-    <div class="grid">
-      <div class="card">Java / Spring Boot</div>
-      <div class="card">REST APIs / Microservices</div>
-      <div class="card">HTML / CSS / JS</div>
-      <div class="card">Three.js / GSAP</div>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div>
-    <h2>Projects</h2>
-    <div class="grid">
-      <div class="card">E-Commerce Backend</div>
-      <div class="card">3D Portfolio Website</div>
-      <div class="card">Spring AI Project</div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="contact">
-    <h2>Contact</h2>
-    <p>
-      📧 vatsal@example.com<br>
-      💼 linkedin.com/in/vatsal-varma-2bb681294<br>
-      🌐 github.com/vatsalvarma
-    </p>
-  </div>
-</section>
-
-<!-- LIBS -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.152/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis/bundled/lenis.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</footer>
 
 <script>
-// === Lenis Smooth Scroll ===
-const lenis = new Lenis({ smooth:true });
-let scrollPos = 0;
-lenis.on("scroll", e => scrollPos = e.scroll);
-function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-requestAnimationFrame(raf);
+/* ===== CONFIG ===== */
+const BASE_URL = "http://localhost:8080"; // change if deployed
+const content = document.getElementById("content");
+let cart = [];
 
-// === Three.js Scene ===
-const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0x05070c, 6, 20);
-
-const camera = new THREE.PerspectiveCamera(70, innerWidth/innerHeight, 0.1, 100);
-camera.position.z = 6;
-
-const renderer = new THREE.WebGLRenderer({ alpha:true, antialias:true });
-renderer.setSize(innerWidth, innerHeight);
-renderer.setClearColor(0x000000, 0);
-document.body.appendChild(renderer.domElement);
-
-// Lights
-scene.add(new THREE.AmbientLight(0xffffff,0.6));
-const point = new THREE.PointLight(0x00f6ff,2);
-point.position.set(4,4,4);
-scene.add(point);
-
-// Spaceship Geometry (no file needed)
-const ship = new THREE.Group();
-const body = new THREE.Mesh(
-  new THREE.ConeGeometry(.45,2,32),
-  new THREE.MeshStandardMaterial({ color:0x00f6ff, metalness:.8, roughness:.2 })
-);
-body.rotation.x = Math.PI/2;
-const cockpit = new THREE.Mesh(
-  new THREE.SphereGeometry(.32,32,32),
-  new THREE.MeshStandardMaterial({ color:0xffffff, emissive:0x00f6ff })
-);
-cockpit.position.z = .6;
-ship.add(body,cockpit);
-scene.add(ship);
-
-// Mouse tilt
-let mx=0, my=0;
-addEventListener("mousemove", e => {
-  mx = (e.clientX/innerWidth - .5)*2;
-  my = (e.clientY/innerHeight - .5)*2;
-});
-
-// Animate
-function animate(){
-  ship.rotation.y += (mx - ship.rotation.y)*.05;
-  ship.rotation.x += (-my - ship.rotation.x)*.05;
-  ship.position.z = -scrollPos * .01;
-  renderer.render(scene, camera);
-  requestAnimationFrame(animate);
+/* ===== API ===== */
+async function apiGet(path) {
+  const res = await fetch(BASE_URL + path);
+  return res.json();
 }
-animate();
 
-// Card fade animations
-gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray(".card").forEach(card=>{
-  gsap.from(card,{
-    y:80, opacity:0, rotateX:20, duration:1,
-    scrollTrigger:{ trigger:card, start:"top 85%" }
-  });
-});
+/* ===== HOME ===== */
+async function loadHome() {
+  const products = await apiGet("/api/products");
 
-// Handle resize
-addEventListener("resize", ()=>{
-  camera.aspect = innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
-});
+  content.innerHTML = `
+    <h2 class="section-title">Products</h2>
+    <div class="grid">
+      ${products.map(p => `
+        <div class="card">
+          <img src="${p.imageUrl || 'https://via.placeholder.com/300'}">
+          <h3>${p.name}</h3>
+          <div class="price">₹${p.price}</div>
+          <button onclick='addToCart(${JSON.stringify(p)})'>Add to Cart</button>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* ===== CATEGORIES ===== */
+async function loadCategories() {
+  const categories = await apiGet("/api/categories");
+
+  content.innerHTML = `
+    <h2 class="section-title">Categories</h2>
+    <div class="grid">
+      ${categories.map(c => `
+        <div class="card">
+          <h3>${c.name}</h3>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* ===== CART ===== */
+function addToCart(product) {
+  cart.push(product);
+  document.getElementById("cartCount").innerText = cart.length;
+}
+
+function loadCart() {
+  if (cart.length === 0) {
+    content.innerHTML = "<h2 class='section-title'>Cart is empty</h2>";
+    return;
+  }
+
+  const total = cart.reduce((sum, p) => sum + Number(p.price), 0);
+
+  content.innerHTML = `
+    <h2 class="section-title">Your Cart</h2>
+    ${cart.map(p => `
+      <div class="cart-item">
+        <span>${p.name}</span>
+        <span>₹${p.price}</span>
+      </div>
+    `).join("")}
+    <h3 style="margin-top:20px">Total: ₹${total}</h3>
+  `;
+}
+
+/* ===== INIT ===== */
+loadHome();
 </script>
 
 </body>
