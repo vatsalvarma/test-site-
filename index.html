@@ -2,167 +2,160 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Auth UI – Smooth Animated Form</title>
+<title>Glass Auth – Vatsal</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root {
-  --primary: #7c7cff;
-  --secondary: #00f5d4;
-  --bg-dark: #0b0f1a;
-  --glass: rgba(255,255,255,0.08);
-  --border: rgba(255,255,255,0.15);
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Poppins", system-ui, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1920");
+  background-size:cover;
+  background-position:center;
+  overflow:hidden;
 }
 
-body {
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #1b1f3b, #05070f);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+/* Glass Card */
+.auth-card{
+  width:380px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter: blur(18px);
+  border-radius:20px;
+  padding:40px 30px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.35);
+  animation:fadeIn 0.8s ease;
 }
 
-/* ===== Card ===== */
-.auth-card {
-  width: 380px;
-  backdrop-filter: blur(20px);
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 40px 30px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-  overflow: hidden;
-  position: relative;
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
-/* ===== Tabs ===== */
-.tabs {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  position: relative;
+/* Tabs */
+.tabs{
+  display:flex;
+  position:relative;
+  margin-bottom:30px;
 }
 
-.tabs button {
-  flex: 1;
-  background: none;
-  border: none;
-  color: #aaa;
-  font-size: 18px;
-  padding: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+.tabs button{
+  flex:1;
+  padding:10px;
+  border:none;
+  background:none;
+  font-size:18px;
+  font-weight:600;
+  cursor:pointer;
+  color:#666;
 }
 
-.tabs button.active {
-  color: #fff;
+.tabs button.active{
+  color:#000;
 }
 
-.tab-indicator {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  border-radius: 10px;
-  transition: transform 0.4s ease;
+.indicator{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:50%;
+  height:3px;
+  background:linear-gradient(90deg,#38bdf8,#22c55e);
+  border-radius:10px;
+  transition:0.4s ease;
 }
 
-/* ===== Forms ===== */
-.forms {
-  display: flex;
-  width: 200%;
-  transition: transform 0.5s ease;
+/* Forms Wrapper */
+.forms{
+  display:flex;
+  width:200%;
+  transition:0.5s ease;
 }
 
-form {
-  width: 50%;
+form{
+  width:50%;
 }
 
-/* ===== Input ===== */
-.input-group {
-  position: relative;
-  margin-bottom: 25px;
+/* Inputs */
+.input-group{
+  position:relative;
+  margin-bottom:22px;
 }
 
-.input-group input {
-  width: 100%;
-  padding: 14px 12px;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 16px;
-  outline: none;
+.input-group input{
+  width:100%;
+  padding:14px 12px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,0.2);
+  background:rgba(255,255,255,0.9);
+  font-size:15px;
+  outline:none;
 }
 
-.input-group label {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  font-size: 14px;
-  color: #aaa;
-  pointer-events: none;
-  transition: 0.3s;
-  background: transparent;
+.input-group label{
+  position:absolute;
+  top:50%;
+  left:12px;
+  transform:translateY(-50%);
+  color:#777;
+  font-size:14px;
+  pointer-events:none;
+  transition:0.3s;
+  background:#fff;
+  padding:0 6px;
 }
 
 .input-group input:focus + label,
-.input-group input:not(:placeholder-shown) + label {
-  top: -7px;
-  font-size: 12px;
-  background: var(--bg-dark);
-  padding: 0 6px;
-  color: var(--secondary);
+.input-group input:not(:placeholder-shown) + label{
+  top:-7px;
+  font-size:12px;
+  color:#16a34a;
 }
 
-/* ===== Button ===== */
-.auth-btn {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #000;
-  transition: transform 0.3s, box-shadow 0.3s;
+/* Button */
+.auth-btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(135deg,#38bdf8,#22c55e);
+  color:#000;
+  transition:0.3s;
 }
 
-.auth-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,245,212,0.4);
+.auth-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(34,197,94,0.5);
 }
 
-/* ===== Footer ===== */
-.footer-text {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 13px;
-  color: #aaa;
+/* Footer */
+.footer{
+  margin-top:18px;
+  text-align:center;
+  font-size:13px;
 }
 
-.footer-text a {
-  color: var(--secondary);
-  text-decoration: none;
+.footer a{
+  color:#16a34a;
+  text-decoration:none;
+  font-weight:500;
 }
 
-/* ===== Mobile ===== */
-@media (max-width: 420px) {
-  .auth-card {
-    width: 92%;
-  }
+@media(max-width:420px){
+  .auth-card{width:92%;}
 }
 </style>
 </head>
@@ -171,9 +164,9 @@ form {
 
 <div class="auth-card">
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab(0)">Login</button>
-    <button class="tab-btn" onclick="switchTab(1)">Register</button>
-    <div class="tab-indicator"></div>
+    <button class="tab active" onclick="switchTab(0)">Login</button>
+    <button class="tab" onclick="switchTab(1)">Register</button>
+    <div class="indicator"></div>
   </div>
 
   <div class="forms">
@@ -183,16 +176,13 @@ form {
         <input type="email" required placeholder=" ">
         <label>Email</label>
       </div>
-
       <div class="input-group">
         <input type="password" required placeholder=" ">
         <label>Password</label>
       </div>
-
       <button class="auth-btn">Login</button>
-
-      <div class="footer-text">
-        Forgot password? <a href="#">Reset</a>
+      <div class="footer">
+        <a href="#">Forgot password?</a>
       </div>
     </form>
 
@@ -202,37 +192,32 @@ form {
         <input type="text" required placeholder=" ">
         <label>Full Name</label>
       </div>
-
       <div class="input-group">
         <input type="email" required placeholder=" ">
         <label>Email</label>
       </div>
-
       <div class="input-group">
         <input type="password" required placeholder=" ">
         <label>Password</label>
       </div>
-
       <button class="auth-btn">Create Account</button>
-
-      <div class="footer-text">
-        By signing up you agree to our <a href="#">Terms</a>
+      <div class="footer">
+        By signing up you agree to <a href="#">Terms</a>
       </div>
     </form>
   </div>
 </div>
 
 <script>
-const forms = document.querySelector('.forms');
-const indicator = document.querySelector('.tab-indicator');
-const buttons = document.querySelectorAll('.tab-btn');
+const forms = document.querySelector(".forms");
+const indicator = document.querySelector(".indicator");
+const tabs = document.querySelectorAll(".tab");
 
-function switchTab(index) {
-  forms.style.transform = `translateX(-${index * 50}%)`;
-  indicator.style.transform = `translateX(${index * 100}%)`;
-
-  buttons.forEach(btn => btn.classList.remove('active'));
-  buttons[index].classList.add('active');
+function switchTab(i){
+  forms.style.transform = `translateX(-${i * 50}%)`;
+  indicator.style.transform = `translateX(${i * 100}%)`;
+  tabs.forEach(t => t.classList.remove("active"));
+  tabs[i].classList.add("active");
 }
 </script>
 
